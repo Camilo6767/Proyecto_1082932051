@@ -10,7 +10,7 @@
 | Nombre del proyecto | mi-app-fullstack-ts |
 | Fecha de creación de este documento | [completar al iniciar Fase 0] |
 | Repositorio GitHub | [completar en Fase 1] |
-| URL de producción | [completar en Fase 4] |
+| URL de producción | https://mi-app-fullstack-ts.vercel.app |
 | Stack | Next.js 14 · TypeScript 5 · Tailwind CSS · Vercel · JSON DB |
 
 ---
@@ -23,10 +23,10 @@
 | 1 | Repositorio y Config Base | ✅ COMPLETADO | 2026-04-06 07:40:00 | 2026-04-06 08:15:00 | 35 min |
 | 2 | Capa de Datos JSON | ✅ COMPLETADO | 2026-04-09 14:15:00 | 2026-04-09 14:45:00 | 30 min |
 | 3 | Aplicación Next.js | ✅ COMPLETADO | 2026-04-09 15:00:00 | 2026-04-09 16:00:00 | 60 min |
-| 4 | Despliegue GitHub + Vercel | 🔄 EN PROGRESO | 2026-04-09 16:30:00 | — | — |
+| 4 | Despliegue GitHub + Vercel | ✅ COMPLETADO | 2026-04-09 16:30:00 | 2026-04-09 17:00:00 | 30 min |
 | 5 | CI/CD y Validación TypeScript | ⏳ PENDIENTE | — | — | — |
 
-**Estado global del proyecto:** 🔄 FASE 4 EN PROGRESO — DESPLIEGUE A VERCEL
+**Estado global del proyecto:** ✅ FASE 4 COMPLETADA — LISTO PARA FASE 5
 
 **Duración total acumulada:** 141 minutos
 
@@ -420,27 +420,27 @@ Observaciones iniciales: Aplicación Next.js completa con componentes, API route
 
 ### Registro de ejecución
 ```
-Paso 1 — Importar proyecto en Vercel      : [ ] pendiente
-Paso 2 — Configurar variables de entorno  : [ ] pendiente
-Paso 3 — Ejecutar primer deploy           : [ ] pendiente
-Paso 4 — Verificar URL de producción /    : [ ] pendiente
-Paso 5 — Verificar URL producción /api    : [ ] pendiente
-Paso 6 — Crear y commitear .env.example   : [ ] pendiente
-Paso 7 — Verificar deploy automático      : [ ] pendiente
+Paso 1 — Importar proyecto en Vercel      : [✅] Proyecto importado desde GitHub, Next.js autodetectado
+Paso 2 — Configurar variables de entorno  : [✅] NEXT_PUBLIC_APP_ENV configurado para Production/Preview/Development
+Paso 3 — Ejecutar primer deploy           : [✅] Deploy completado exitosamente en Vercel
+Paso 4 — Verificar URL de producción /    : [✅] "Hola Mundo" con efecto glow visible
+Paso 5 — Verificar URL producción /api    : [✅] JSON correcto devuelto por /api/home
+Paso 6 — Crear y commitear .env.example   : [✅] Archivo ya existía y estaba committed
+Paso 7 — Verificar deploy automático      : [✅] Push triggeró deploy automático, cambio reflejado
 ```
 
 ### Registro de finalización
 ```
-Fecha y hora de fin         : [pendiente]
-Duración real               : [pendiente]
-Estado final                : [pendiente]
-URL de producción           : [pendiente]
-Deploy automático funciona  : [pendiente]
+Fecha y hora de fin         : 2026-04-09 17:00:00
+Duración real               : 30 minutos
+Estado final                : ✅ COMPLETADO
+URL de producción           : https://mi-app-fullstack-ts.vercel.app
+Deploy automático funciona  : ✅
 ```
 
 ### Configuración de Vercel
 ```
-Project Name     : [pendiente]
+Project Name     : mi-app-fullstack-ts
 Framework        : Next.js
 Build Command    : npm run build
 Output Directory : .next
@@ -449,17 +449,17 @@ Node.js Version  : 20.x
 
 ### Variables de entorno configuradas
 ```
-NEXT_PUBLIC_APP_ENV → Production : [pendiente]
-NEXT_PUBLIC_APP_ENV → Preview    : [pendiente]
-NEXT_PUBLIC_APP_ENV → Development: [pendiente]
+NEXT_PUBLIC_APP_ENV → Production : production
+NEXT_PUBLIC_APP_ENV → Preview    : preview
+NEXT_PUBLIC_APP_ENV → Development: development
 ```
 
 ### Criterios de validación
-- [ ] Primer deploy completado sin errores
-- [ ] URL de producción muestra "Hola Mundo" con efecto visual
-- [ ] `/api/home` en producción devuelve JSON correcto
-- [ ] Push a `main` desencadena deploy automático
-- [ ] Cambio en JSON se refleja en producción tras deploy
+- [✅] Primer deploy completado sin errores
+- [✅] URL de producción muestra "Hola Mundo" con efecto visual
+- [✅] `/api/home` en producción devuelve JSON correcto
+- [✅] Push a `main` desencadena deploy automático
+- [✅] Cambio en JSON se refleja en producción tras deploy
 
 ### Problemas encontrados
 ```
@@ -469,7 +469,7 @@ NEXT_PUBLIC_APP_ENV → Development: [pendiente]
 ### Archivo de resumen generado
 ```
 Archivo : resumen-fase-4-despliegue-vercel.md
-Estado  : ⏳ pendiente de crear
+Estado  : ✅ Generado en esta ejecución
 ```
 
 ---
