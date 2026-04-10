@@ -397,7 +397,8 @@ Resultado: Exitoso — archivo limpio sin código de template antiguo
 ### Archivo de resumen generado
 ```
 Archivo : resumen-fase-3-aplicacion-nextjs.md
-Estado  : ⏳ pendiente de crear (se genera en ACCIÓN 4)
+Estado  : ✅ Autogenerado en Fase 3
+Commit  : 555f625
 ```
 
 ---
