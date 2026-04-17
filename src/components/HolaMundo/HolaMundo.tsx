@@ -84,6 +84,12 @@ export default function HolaMundo({
           {description}
         </p>
 
+        {/* Información adicional solicitada */}
+        <div className="text-gray-300 text-base max-w-md mx-auto space-y-1">
+          <p>Documento: 1082932051</p>
+          <p>Nombre: Camilo Moreno</p>
+        </div>
+
         {/* Badge: validación técnica */}
         <div className="pt-4 border-t border-gray-800">
           <span className="inline-block text-xs text-gray-600 font-mono tracking-wide">
