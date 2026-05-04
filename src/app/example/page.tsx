@@ -56,7 +56,7 @@ export default function ExampleDatabaseComponent() {
     const response = await db.update(id, updates);
 
     if (response.success && response.data) {
-      setRecords(records.map((r) => (r.id === id ? response.data : r)));
+      setRecords(records.map((r) => (r.id === id ? (response.data as ExampleRecord) : r)));
     } else {
       alert(`Error: ${response.error}`);
     }

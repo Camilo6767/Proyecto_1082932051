@@ -24,13 +24,13 @@ export async function readCollection<T extends DatabaseRecord = DatabaseRecord>(
 ): Promise<T[]> {
   try {
     const path = getBlobPath(collection);
-    const blob = await get(path);
+    const blob = await get(path, { access: 'private', useCache: false });
 
     if (!blob) {
       return [];
     }
 
-    const text = await blob.text();
+    const text = await new Response(blob.stream).text();
     return JSON.parse(text) as T[];
   } catch (error) {
     console.error(`Error reading collection ${collection}:`, error);
@@ -50,6 +50,7 @@ export async function writeCollection<T extends DatabaseRecord = DatabaseRecord>
     const jsonContent = JSON.stringify(records, null, 2);
 
     await put(path, jsonContent, {
+      access: 'private',
       contentType: 'application/json',
       addRandomSuffix: false,
     });
@@ -200,7 +201,7 @@ export async function queryRecords<T extends DatabaseRecord = DatabaseRecord>(
 export async function deleteCollection(collection: string): Promise<void> {
   try {
     const path = getBlobPath(collection);
-    await del(path);
+    await del(path, { token: process.env.BLOB_READ_WRITE_TOKEN });
   } catch (error) {
     console.error(`Error deleting collection ${collection}:`, error);
     throw error;
@@ -213,7 +214,7 @@ export async function deleteCollection(collection: string): Promise<void> {
 export async function collectionExists(collection: string): Promise<boolean> {
   try {
     const path = getBlobPath(collection);
-    const blob = await get(path);
+    const blob = await get(path, { access: 'private', useCache: false });
     return blob !== null;
   } catch (error) {
     return false;

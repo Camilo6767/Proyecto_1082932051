@@ -22,7 +22,7 @@ export interface APIResponse<T = any> {
 }
 
 export interface CRUDOperation {
-  operation: 'create' | 'read' | 'update' | 'delete' | 'list';
+  operation: 'create' | 'read' | 'update' | 'delete' | 'list' | 'query';
   collection: string;
   record?: DatabaseRecord;
   id?: string;
