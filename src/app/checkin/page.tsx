@@ -1,6 +1,6 @@
-'use client';
+﻿'use client';
 
-import { useEffect, useMemo, useState, Suspense } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { calculateNights, calculateTotal } from '@/lib/bookingService';
 import { type Room } from '@/lib/types';
@@ -280,4 +280,8 @@ function CheckInForm() {
       </div>
     </main>
   );
+}
+
+export default function CheckinPage() {
+  return <CheckInForm />;
 }
