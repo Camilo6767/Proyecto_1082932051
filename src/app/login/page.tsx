@@ -1,7 +1,79 @@
 'use client';
 
-import { type FormEvent, useState } from 'react';
+import { type CSSProperties, type FormEvent, useState } from 'react';
 import { useRouter } from 'next/navigation';
+
+const styles: Record<string, CSSProperties> = {
+  main: {
+    minHeight: '100vh',
+    backgroundColor: '#020617',
+    color: '#f8fafc',
+    padding: '48px 16px',
+    fontFamily: 'Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  },
+  container: {
+    margin: '0 auto',
+    maxWidth: '520px',
+    borderRadius: '32px',
+    border: '1px solid rgba(148, 163, 184, 0.2)',
+    backgroundColor: 'rgba(15, 23, 42, 0.98)',
+    padding: '32px',
+    boxShadow: '0 20px 60px rgba(15, 23, 42, 0.35)',
+  },
+  heading: {
+    fontSize: '2rem',
+    fontWeight: 700,
+    marginBottom: '12px',
+    color: '#ffffff',
+  },
+  description: {
+    color: '#94a3b8',
+    lineHeight: 1.7,
+    marginBottom: '28px',
+  },
+  form: {
+    display: 'grid',
+    gap: '20px',
+  },
+  label: {
+    display: 'block',
+    color: '#cbd5e1',
+    fontSize: '0.95rem',
+  },
+  input: {
+    width: '100%',
+    marginTop: '10px',
+    borderRadius: '20px',
+    border: '1px solid rgba(148, 163, 184, 0.2)',
+    backgroundColor: '#0f172a',
+    color: '#f8fafc',
+    padding: '14px 16px',
+    fontSize: '1rem',
+    outline: 'none',
+  },
+  button: {
+    width: '100%',
+    borderRadius: '20px',
+    border: 'none',
+    backgroundColor: '#0ea5e9',
+    color: '#0f172a',
+    padding: '14px 16px',
+    fontSize: '1rem',
+    fontWeight: 700,
+    cursor: 'pointer',
+  },
+  buttonDisabled: {
+    opacity: 0.65,
+    cursor: 'not-allowed',
+  },
+  error: {
+    borderRadius: '20px',
+    backgroundColor: 'rgba(251, 146, 60, 0.15)',
+    color: '#fee2e2',
+    padding: '12px 14px',
+    fontSize: '0.95rem',
+  },
+};
 
 export default function LoginPage() {
   const router = useRouter();
@@ -30,7 +102,7 @@ export default function LoginPage() {
       }
 
       router.push('/dashboard');
-    } catch (error) {
+    } catch (err) {
       setError('Error de conexión. Intenta nuevamente.');
     } finally {
       setLoading(false);
@@ -38,49 +110,37 @@ export default function LoginPage() {
   };
 
   return (
-    <main
-      className="min-h-screen bg-slate-950 text-slate-100 px-4 py-12 sm:px-6 lg:px-8"
-      style={{ backgroundColor: '#0f172a', minHeight: '100vh' }}
-    >
-      <div
-        className="mx-auto max-w-xl rounded-3xl border border-slate-700 bg-slate-900/95 p-8 shadow-2xl shadow-slate-950/20"
-        style={{ backgroundColor: 'rgba(15, 23, 42, 0.95)' }}
-      >
-        <h1 className="text-3xl font-semibold text-white">HostDesk</h1>
-        <p className="mt-3 text-slate-400">Inicia sesión para acceder al dashboard de administración y recepcionista.</p>
+    <main style={styles.main}>
+      <div style={styles.container}>
+        <h1 style={styles.heading}>HostDesk</h1>
+        <p style={styles.description}>Inicia sesión para acceder al dashboard de administración y recepcionista.</p>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          <div className="space-y-4">
-            <label className="block">
-              <span className="text-sm text-slate-300">Correo electrónico</span>
-              <input
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20"
-                required
-              />
-            </label>
+        <form style={styles.form} onSubmit={handleSubmit}>
+          <label style={styles.label}>
+            Correo electrónico
+            <input
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              style={styles.input}
+              required
+            />
+          </label>
 
-            <label className="block">
-              <span className="text-sm text-slate-300">Contraseña</span>
-              <input
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400 focus:ring-2 focus:ring-sky-500/20"
-                required
-              />
-            </label>
-          </div>
+          <label style={styles.label}>
+            Contraseña
+            <input
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              style={styles.input}
+              required
+            />
+          </label>
 
-          {error ? <p className="rounded-2xl bg-rose-500/10 px-4 py-3 text-sm text-rose-200">{error}</p> : null}
+          {error ? <p style={styles.error}>{error}</p> : null}
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="inline-flex w-full justify-center rounded-2xl bg-sky-500 px-4 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70"
-          >
+          <button type="submit" style={{ ...styles.button, ...(loading ? styles.buttonDisabled : {}) }} disabled={loading}>
             {loading ? 'Iniciando sesión...' : 'Iniciar sesión'}
           </button>
         </form>
