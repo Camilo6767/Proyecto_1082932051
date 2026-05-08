@@ -1,0 +1,8 @@
+{
+  "app": {
+    "name": "Mi App Fullstack TS",
+    "version": "1.0.0",
+    "locale": "es-CO",
+    "theme": "dark"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "hero": {
+    "title": "Hola Mundo",
+    "subtitle": "TypeScript · Next.js · Vercel ✓",
+    "description": "Sistema fullstack funcionando correctamente.",
+    "effect": "glow-pulse"
+  }
+}
