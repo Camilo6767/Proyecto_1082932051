@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-export default function DbSetupPage() {
+export default function SetupPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -53,10 +53,10 @@ export default function DbSetupPage() {
         }}
       >
         <h1 style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '12px' }}>
-          ⚙️ Configurar Base de Datos
+          ⚙️ Setup Base de Datos
         </h1>
         <p style={{ color: '#94a3b8', marginBottom: '28px', lineHeight: 1.7 }}>
-          Esta página creará las tablas en Supabase e insertará el seed inicial. Se eliminará después del setup.
+          Esta página insertará el seed inicial en Supabase. <strong>Las tablas deben ya existir.</strong>
         </p>
 
         <button
@@ -75,7 +75,7 @@ export default function DbSetupPage() {
             opacity: loading ? 0.65 : 1,
           }}
         >
-          {loading ? 'Configurando...' : 'Iniciar Setup'}
+          {loading ? 'Configurando...' : 'Iniciar Seed'}
         </button>
 
         {message && (
