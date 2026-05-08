@@ -38,8 +38,14 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-xl rounded-3xl border border-slate-700 bg-slate-900/95 p-8 shadow-2xl shadow-slate-950/20">
+    <main
+      className="min-h-screen bg-slate-950 text-slate-100 px-4 py-12 sm:px-6 lg:px-8"
+      style={{ backgroundColor: '#0f172a', minHeight: '100vh' }}
+    >
+      <div
+        className="mx-auto max-w-xl rounded-3xl border border-slate-700 bg-slate-900/95 p-8 shadow-2xl shadow-slate-950/20"
+        style={{ backgroundColor: 'rgba(15, 23, 42, 0.95)' }}
+      >
         <h1 className="text-3xl font-semibold text-white">HostDesk</h1>
         <p className="mt-3 text-slate-400">Inicia sesión para acceder al dashboard de administración y recepcionista.</p>
 
