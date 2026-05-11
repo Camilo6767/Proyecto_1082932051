@@ -2,7 +2,7 @@ import { type NextRequest } from 'next/server';
 import { withAuth } from '@/lib/withAuth';
 import { withRole } from '@/lib/withRole';
 import { getSystemMode } from '@/lib/dataService';
-import { getSupabaseClient } from '@/lib/supabase';
+import { requireSupabaseClient } from '@/lib/supabase';
 import { readAuditMonth } from '@/lib/blobAudit';
 import { getAppliedMigrationNames, loadMigrationFiles } from '@/lib/pgMigrate';
 import { type JwtPayload } from '@/lib/types';
@@ -25,7 +25,7 @@ async function handler(_request: NextRequest, _user: JwtPayload): Promise<Respon
     return createJsonResponse({ ...result, seed: true });
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const diagnostics: Record<string, unknown> = {};
 
   try {

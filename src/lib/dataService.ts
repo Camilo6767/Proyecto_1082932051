@@ -1,4 +1,4 @@
-import { getSupabaseClient } from './supabase';
+import { requireSupabaseClient } from './supabase';
 import { appendAudit } from './blobAudit';
 import { getSeedUserByEmail, getSeedRooms, getSeedUsers } from './seedReader';
 import { getAppliedMigrationNames } from './pgMigrate';
@@ -43,7 +43,7 @@ export async function getUserCredentialsByEmail(email: string): Promise<UserWith
       : null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .select('id, email, name, role, must_change_password, disabled, password_hash')
@@ -72,7 +72,7 @@ export async function getUserById(id: string): Promise<User | null> {
     return seedUser ? mapSeedUser(seedUser) : null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .select('id, email, name, role, must_change_password, disabled')
@@ -103,7 +103,7 @@ export async function changePassword(userId: string, newPassword: string): Promi
   }
 
   const hashedPassword = await hashPassword(newPassword);
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .update({ password_hash: hashedPassword, must_change_password: false })
@@ -138,7 +138,7 @@ export async function getRooms(): Promise<RoomWithActiveGuest[]> {
     return seedRooms.map(mapSeedRoom).sort((a, b) => a.number.localeCompare(b.number));
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const [roomsResponse, bookingsResponse] = await Promise.all([
     supabase
       .from('rooms')
@@ -179,7 +179,7 @@ export async function getRoomById(id: string): Promise<RoomWithActiveGuest | nul
     return seedRoom ? mapSeedRoom(seedRoom) : null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const [{ data: roomData, error: roomError }, { data: bookingData, error: bookingError }] = await Promise.all([
     supabase
       .from('rooms')
@@ -224,7 +224,7 @@ export async function createRoom(room: CreateRoomRequest): Promise<Room> {
   }
 
   const parsed = createRoomSchema.parse(room);
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase.from('rooms').insert({
     number: parsed.number,
     type: parsed.type,
@@ -255,7 +255,7 @@ export async function updateRoom(id: string, updates: UpdateRoomRequest): Promis
   }
 
   const parsed = updateRoomSchema.parse(updates);
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
 
   const { data: currentRoom, error: fetchError } = await supabase
     .from('rooms')
@@ -304,7 +304,7 @@ export async function deactivateRoom(id: string): Promise<void> {
     throw new Error('El sistema está en modo seed. Ejecuta el bootstrap primero.');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data: room, error: roomError } = await supabase
     .from('rooms')
     .select('id, number')
@@ -344,7 +344,7 @@ export async function getGuestByIdentification(identification: string): Promise<
     return null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('guests')
     .select('*')
@@ -365,7 +365,7 @@ export async function createGuest(name: string, identification: string, phone: s
     throw new Error('El sistema está en modo seed. Ejecuta el bootstrap primero.');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('guests')
     .insert({ name, identification, phone })
@@ -386,7 +386,7 @@ export async function checkIn(request: CheckInRequest): Promise<Booking> {
   }
 
   const parsed = checkInSchema.parse(request);
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
 
   const { data: room, error: roomError } = await supabase
     .from('rooms')
@@ -472,7 +472,7 @@ export async function getActiveBooking(roomId: string): Promise<BookingWithGuest
     return null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('bookings')
     .select(`
@@ -504,7 +504,7 @@ export async function getBookingById(id: string): Promise<BookingWithGuest | nul
     return null;
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('bookings')
     .select(`
@@ -535,7 +535,7 @@ export async function checkOut(userId: string, bookingId: string): Promise<Booki
     throw new Error('El sistema está en modo seed. Ejecuta el bootstrap primero.');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
 
   // Obtener la reserva activa
   const { data: booking, error: bookingError } = await supabase
@@ -610,7 +610,7 @@ export async function getCompletedBookingsByMonth(year: number, month: number): 
     return [];
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const startDate = new Date(year, month - 1, 1);
   const endDate = new Date(year, month, 1);
 
@@ -655,7 +655,7 @@ export async function getAllUsers(): Promise<User[]> {
     }));
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .select('*')
@@ -681,7 +681,7 @@ export async function createUser(email: string, name: string, role: Role, passwo
     throw new Error('No se pueden crear usuarios en modo seed');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .insert({
@@ -722,7 +722,7 @@ export async function updateUser(id: string, updates: Partial<Pick<User, 'name' 
     throw new Error('No se pueden actualizar usuarios en modo seed');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { data, error } = await supabase
     .from('users')
     .update(updates)
@@ -758,7 +758,7 @@ export async function deleteUser(id: string): Promise<void> {
     throw new Error('No se pueden eliminar usuarios en modo seed');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { error } = await supabase
     .from('users')
     .delete()
@@ -783,7 +783,7 @@ export async function resetUserPassword(id: string, newPasswordHash: string): Pr
     throw new Error('No se pueden resetear contraseñas en modo seed');
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const { error } = await supabase
     .from('users')
     .update({

@@ -2,7 +2,7 @@ import { type NextRequest } from 'next/server';
 import { withAuth } from '@/lib/withAuth';
 import { withRole } from '@/lib/withRole';
 import { applyPendingMigrations } from '@/lib/pgMigrate';
-import { getSupabaseClient } from '@/lib/supabase';
+import { requireSupabaseClient } from '@/lib/supabase';
 import { getSeedUsers, getSeedRooms } from '@/lib/seedReader';
 import { type JwtPayload } from '@/lib/types';
 
@@ -17,7 +17,7 @@ function createJsonResponse(body: unknown, status = 200): Response {
 }
 
 async function seedInitialData(): Promise<{ users: number; rooms: number }> {
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const seedUsers = await getSeedUsers();
   const seedRooms = await getSeedRooms();
   let insertedUsers = 0;

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { withAuth } from '@/lib/withAuth';
-import { getSupabaseClient } from '@/lib/supabase';
+import { requireSupabaseClient } from '@/lib/supabase';
 import { getSystemMode } from '@/lib/dataService';
 import { getSeedRooms } from '@/lib/seedReader';
 import { type JwtPayload } from '@/lib/types';
@@ -30,7 +30,7 @@ async function handler(_request: Request, user: JwtPayload) {
     });
   }
 
-  const supabase = getSupabaseClient();
+  const supabase = requireSupabaseClient();
   const [availableResponse, occupiedResponse] = await Promise.all([
     supabase
       .from('rooms')
