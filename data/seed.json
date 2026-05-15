@@ -1,37 +1,48 @@
 {
   "users": [
     {
+      "id": "admin-001",
       "email": "admin@hostdesk.com",
-      "password_hash": "$2b$10$tbrZZNvzfVEbraFnzQxUguAIBzB3PTg3iRqG0X5hE8A1LZobAAMCG",
+      "password_hash": "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcg7b3XeKeUxWdeS86E36P4/lLm",
       "role": "admin",
-      "name": "Administrador"
+      "name": "Administrador",
+      "must_change_password": false,
+      "disabled": false
     }
   ],
   "rooms": [
     {
+      "id": "room-101",
       "number": "101",
       "type": "sencilla",
       "price_per_night": 80000
     },
     {
+      "id": "room-102",
       "number": "102",
       "type": "sencilla",
       "price_per_night": 80000
     },
     {
+      "id": "room-201",
       "number": "201",
       "type": "doble",
       "price_per_night": 120000
     },
     {
+      "id": "room-202",
       "number": "202",
       "type": "doble",
       "price_per_night": 120000
     },
     {
+      "id": "room-301",
       "number": "301",
       "type": "suite",
       "price_per_night": 200000
     }
-  ]
+  ],
+  "check_ins": [],
+  "check_outs": [],
+  "guests": []
 }

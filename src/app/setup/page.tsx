@@ -17,12 +17,19 @@ export default function SetupPage() {
         method: 'POST',
       });
 
-      const result = await response.json();
+      const text = await response.text();
+      let result: { success?: boolean; message?: string } = {};
+
+      try {
+        result = text ? JSON.parse(text) : { success: false, message: 'Respuesta vacía del servidor' };
+      } catch {
+        result = { success: false, message: text || `Respuesta no válida (${response.status})` };
+      }
 
       if (response.ok) {
-        setMessage(result.message);
+        setMessage(result.message ?? 'Setup completado.');
       } else {
-        setError(result.message);
+        setError(result.message ?? 'Error desconocido del servidor.');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
@@ -56,7 +63,7 @@ export default function SetupPage() {
           ⚙️ Setup Base de Datos
         </h1>
         <p style={{ color: '#94a3b8', marginBottom: '28px', lineHeight: 1.7 }}>
-          Esta página insertará el seed inicial en Supabase. <strong>Las tablas deben ya existir.</strong>
+          Esta página insertará el seed inicial en la base de datos local (JSON). <strong>No requiere conexión a Supabase.</strong>
         </p>
 
         <button

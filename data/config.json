@@ -1,8 +1,6 @@
 {
-  "app": {
-    "name": "Mi App Fullstack TS",
-    "version": "1.0.0",
-    "locale": "es-CO",
-    "theme": "dark"
-  }
+  "version": "1.0",
+  "database": "json",
+  "lastUpdated": "2026-05-15T12:04:49.212Z",
+  "seedStatus": "initialized"
 }
