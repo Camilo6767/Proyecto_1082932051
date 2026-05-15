@@ -70,19 +70,47 @@ export default function SetupPage() {
           onClick={handleSetup}
           disabled={loading}
           style={{
-            backgroundColor: '#1d4ed8',
-            color: '#f8fafc',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            border: 'none',
+            width: '100%',
+            borderRadius: '20px',
+            backgroundColor: loading ? '#64748b' : '#10b981',
+            color: '#ffffff',
+            padding: '14px 16px',
+            fontSize: '1rem',
+            fontWeight: 700,
             cursor: loading ? 'not-allowed' : 'pointer',
-            opacity: loading ? 0.6 : 1,
+            opacity: loading ? 0.65 : 1,
           }}
         >
           {loading ? 'Cargando...' : 'Iniciar Setup'}
         </button>
-        {message && <p style={{ color: '#22c55e' }}>{message}</p>}
-        {error && <p style={{ color: '#ef4444' }}>{error}</p>}
+        {message && (
+          <div
+            style={{
+              marginTop: '20px',
+              borderRadius: '20px',
+              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              color: '#10b981',
+              padding: '12px 14px',
+              fontSize: '0.95rem',
+            }}
+          >
+            ✅ {message}
+          </div>
+        )}
+        {error && (
+          <div
+            style={{
+              marginTop: '20px',
+              borderRadius: '20px',
+              backgroundColor: 'rgba(251, 146, 60, 0.15)',
+              color: '#ef4444',
+              padding: '12px 14px',
+              fontSize: '0.95rem',
+            }}
+          >
+            ❌ {error}
+          </div>
+        )}
       </div>
     </main>
   );
